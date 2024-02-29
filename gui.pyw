@@ -45,6 +45,17 @@ class Gui(tk.Tk):
         # Set the theme with the theme to match the system theme
         self.check_dark()
 
+        self.style.configure('gps.TButton',
+                        foreground='yellow',
+                        background='black')
+        self.style.map('gps.TButton',
+                       foreground=[('disabled', 'yellow'),
+                                   ('!disabled', 'white')],
+                       highlightcolor=[('disabled', 'red'),
+                                   ('!disabled', 'green')],
+                       )
+
+
     def layout(self):
         self.resizable(False, False)
         self.title('GPS')
@@ -58,7 +69,9 @@ class Gui(tk.Tk):
         main_frame.pack(expand=True, fill='y')
         ttk.Label(main_frame, image=self.image).pack()
 
-        self.gps_button = ttk.Button(main_frame, command=self.startGPS)
+        self.gps_button = ttk.Button(main_frame, command=self.startGPS,
+                                     style='gps.TButton',
+                                     text='GPS')
         self.gps_button.pack(padx=10)
         
         bg = ttk.Frame(main_frame)
@@ -129,4 +142,4 @@ class Gui(tk.Tk):
         self.destroy()
 
 if __name__ == '__main__':
-    Gui().start(None)
+    Gui().start(None, None)
